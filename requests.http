@@ -1,0 +1,11 @@
+### 2.4 simple string message
+POST http://localhost:8080/send?message=Hello
+
+### 3 structured JSON message
+POST http://localhost:8080/sendStructured?message=Hello%20Again
+
+### 5 transaction: success, both messages arrive
+POST http://localhost:8080/sendTransactional?first=one&second=two
+
+### 5 transaction: failure between the sends, no message arrives
+POST http://localhost:8080/sendTransactional?first=lost-one&second=lost-two&fail=true

@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: kafkasample
+  kafka:
+    bootstrap-servers:
+      - localhost:9092
+    consumer:
+      group-id: myGroup
+      value-deserializer: org.springframework.kafka.support.serializer.JacksonJsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+      # consumers must not see messages of aborted transactions
+      isolation-level: read_committed
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JacksonJsonSerializer
+      # enables the KafkaTransactionManager (needed by @Transactional) and transactional producers
+      transaction-id-prefix: tx-
